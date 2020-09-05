@@ -173,7 +173,7 @@ def film_and_series(message):
 @bot.message_handler(content_types=["text"]) 
 def check_mess(message):
     get_mess_bot = message.text
-    type_mess = type(get_mess_bot)
+
     if get_mess_bot == "🔝Top":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
         btn1 = types.KeyboardButton("Movie")
