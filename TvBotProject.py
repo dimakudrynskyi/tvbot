@@ -10,10 +10,13 @@ from datetime import date
 from datetime import datetime
 import time
 import threading
+import os
 import re
-import config
 
-bot = telebot.TeleBot(config.API_TOKEN)
+
+
+API_TOKEN = os.environ["API_TOKEN"]
+bot = telebot.TeleBot(API_TOKEN)
 
 
 

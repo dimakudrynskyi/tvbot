@@ -1,0 +1,41 @@
+name: application-deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    runs-on: dev
+
+    steps:
+    - name: Clean workspace
+      uses: AutoModality/action-clean@v1
+
+    - name: checkout directory
+      uses: actions/checkout@v2
+
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        envkey_NODE_ENV: "production"
+        envkey_RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
+        envkey_RDS_PORT: 5432
+        envkey_RDS_DB_NAME: ${{ secrets.RDS_DB_NAME }}
+        envkey_RDS_USERNAME: ${{ secrets.RDS_USERNAME }}
+        envkey_RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
+        envkey_HOST: "0.0.0.0"
+        envkey_PORT: 3010
+        envkey_S3_BUCKET: "kyhu-data"
+        envkey_S3_REGION: "us-east-2"
+        envkey_SYSTEM_ACCESS_KEY: ${{ secrets.SYSTEM_ACCESS_KEY }}
+        envkey_SYSTEM_SECRET_KEY: ${{ secrets.SYSTEM_SECRET_KEY }}
+        envkey_FIREBASE_DATABASE_URL: "https://kyhu-d195b.firebaseio.com"
+        file_name: .env
+
+    - name: docker build no cache
+      run: docker build -t tvbot .
+      
+    - name: docker compose up detach
+      run: docker run -e API_TOKEN=${{ secrets.API_TOKEN }} -d --rm tvbot
