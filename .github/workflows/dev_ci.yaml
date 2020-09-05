@@ -7,7 +7,7 @@ on:
 jobs:
 
   build:
-    runs-on: dev
+    runs-on: self-hosted
 
     steps:
     - name: Clean workspace
