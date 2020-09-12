@@ -34,4 +34,4 @@ class sqlighter:
     def close(self):
         """Close connect with db""" 
         self.connection.close()
-    
+   

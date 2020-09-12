@@ -20,4 +20,4 @@ jobs:
       run: docker build -t tvbot .
       
     - name: docker compose up detach
-      run: docker run -e API_TOKEN=${{ secrets.API_TOKEN }}, API_KEY=${{ secrets.API_KEY }}  -d --rm tvbot
+      run: docker run -e API_TOKEN=${{ secrets.API_TOKEN }} -e API_KEY=${{ secrets.API_KEY }}  -d --rm tvbot
