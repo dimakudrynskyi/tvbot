@@ -23,7 +23,7 @@ API_TOKEN = os.environ["API_TOKEN"]
 bot = telebot.TeleBot(API_TOKEN)
 
 
-def send_top(typee, day, message):
+def send_top(typee,day,message):
     url = f"https://api.themoviedb.org/3/trending/{typee}/{day}?api_key={API_KEY}"
     response = requests.get(url, headers={'Accept' : 'application/json'})
     data = response.json()
